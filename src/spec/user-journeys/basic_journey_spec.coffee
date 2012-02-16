@@ -24,7 +24,7 @@ describe 'basic user journey test', ->
 
     it 'should have a slider element', ->
       whenPageHasLoaded 'http://localhost:3000/how-are-you-feeling', ->
-        expect( browser.query("#slider") )
+        expect( browser.query('#slider') )
         jasmine.asyncSpecDone()
 
     #it 'should submit my mood', ->

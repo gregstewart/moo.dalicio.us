@@ -28,7 +28,7 @@
       });
       return it('should have a slider element', function() {
         return whenPageHasLoaded('http://localhost:3000/how-are-you-feeling', function() {
-          expect(browser.query("#slider"));
+          expect(browser.query('#slider'));
           return jasmine.asyncSpecDone();
         });
       });
