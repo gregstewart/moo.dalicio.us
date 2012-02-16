@@ -12,10 +12,19 @@
           return jasmine.asyncSpecDone();
         });
       });
-      return it('should have a link to take me to capture my mood', function() {
+      it('should have a link to take me to capture my mood', function() {
         return whenPageHasLoaded('http://localhost:3000/', function() {
-          expect(browser.text('a:last')).toBe('How are you feeling?');
+          expect(browser.text('a:last')).toBe('How are you feeling today?');
           return jasmine.asyncSpecDone();
+        });
+      });
+      return it('clicking on the link should take you to the slider page', function() {
+        return whenPageHasLoaded('http://localhost:3000/', function() {
+          var _this = this;
+          return browser.clickLink('a:last', function(error, browser) {
+            expect(browser.location.pathname).toBe('/how-are-you-feeling');
+            return jasmine.asyncSpecDone();
+          });
         });
       });
     });
@@ -26,10 +35,19 @@
           return jasmine.asyncSpecDone();
         });
       });
-      return it('should have a slider element', function() {
+      it('should have a slider element', function() {
         return whenPageHasLoaded('http://localhost:3000/how-are-you-feeling', function() {
           expect(browser.query('#slider'));
           return jasmine.asyncSpecDone();
+        });
+      });
+      return it('should submit my mood', function() {
+        return whenPageHasLoaded('http://localhost:3000/how-are-you-feeling', function() {
+          var _this = this;
+          return browser.pressButton('save me', function(error, browser) {
+            expect(browser.location.pathname).toBe('/save-my-mood');
+            return jasmine.asyncSpecDone();
+          });
         });
       });
     });
