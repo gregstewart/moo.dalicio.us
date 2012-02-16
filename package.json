@@ -1,0 +1,12 @@
+{
+    "name": "happiness"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+      "express": "2.5.5"
+    , "jade": ">= 0.0.1"
+    , "coffee-script":    ">= 1.2.0"
+    , "zombie":           ">= 0.12.14"
+    , "jasmine-node":     ">= 1.0.21"
+  }
+}
