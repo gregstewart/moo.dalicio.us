@@ -1,10 +1,57 @@
-!!!
+!!! 5
 html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.min.css')
+    style
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+
+      #slider {
+        margin: 1em 0;
+      }
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+
+  body
+
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.btn.btn-navbar(data-toggle="collapse",data-target=".nav-collapse")
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand(href="#") Project name
+          .nav-collapse
+            ul.nav
+              li.active
+                a(href="/") Home
+              li
+                a(href="/about") About
+              li
+                a(href="/contact") Contact
+
+    .container!=body
+
+       footer
+         p &copy; Company 2012
+
+
+    script(src='/javascripts/lib/jquery-1.7.1.min.js')
     script(src='/javascripts/lib/bootstrap.min.js')
     script(src='/javascripts/lib/smiley-slider.js')
+    script
+        $(document).ready(function() {
+            var s = new SmileySlider(document.getElementById('slider'));
 
-  body!= body
+            s.position(0); // make it sad
+            s.position(1); // make it happy
+
+            var p = s.position(); // get it's position
+            s.position(p / 2); // make it half as happy
+
+            s.position(function (p) {
+                // do something when it changes
+            });
+        });
