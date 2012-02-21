@@ -4,8 +4,32 @@
     var Browser, browser, jasmine, whenPageHasLoaded;
     Browser = require('zombie');
     jasmine = require('jasmine-node');
-    Browser.debug = true;
     browser = new Browser();
+    describe('visit log in/sign up page', function() {
+      it('visit the not logged in page', function() {
+        return whenPageHasLoaded('http://localhost:3000/not-logged-in', function() {
+          expect(browser.text('title')).toBe('Not looged in');
+          return jasmine.asyncSpecDone();
+        });
+      });
+      it('should redirect to log in if not logged in', function() {});
+      describe('login process', function() {
+        return it('should visit the signin page', function() {
+          return whenPageHasLoaded('http://localhost:3000/sign-in', function() {
+            expect(browser.text('title')).toBe('Sign in process');
+            return jasmine.asyncSpecDone();
+          });
+        });
+      });
+      return describe('signup process', function() {
+        return it('should visit the signup page', function() {
+          return whenPageHasLoaded('http://localhost:3000/sign-up', function() {
+            expect(browser.text('title')).toBe('Sign up process');
+            return jasmine.asyncSpecDone();
+          });
+        });
+      });
+    });
     describe('visit the homepage', function() {
       it('should visit homepage', function() {
         return whenPageHasLoaded('http://localhost:3000/', function() {
@@ -29,6 +53,14 @@
         });
       });
     });
+    describe('creating a project', function() {
+      return it('should visit the create project page', function() {
+        return whenPageHasLoaded('http://localhost:3000/create-project', function() {
+          expect(browser.text('title')).toBe('Create project');
+          return jasmine.asyncSpecDone();
+        });
+      });
+    });
     describe('capture my mood', function() {
       it('should visit how I feel page', function() {
         return whenPageHasLoaded('http://localhost:3000/how-are-you-feeling', function() {
@@ -36,19 +68,10 @@
           return jasmine.asyncSpecDone();
         });
       });
-      it('should have a slider element', function() {
+      return it('should have a slider element', function() {
         return whenPageHasLoaded('http://localhost:3000/how-are-you-feeling', function() {
           expect(browser.query('#slider'));
           return jasmine.asyncSpecDone();
-        });
-      });
-      return it('should submit my mood', function() {
-        return whenPageHasLoaded('http://localhost:3000/how-are-you-feeling', function() {
-          var _this = this;
-          return browser.pressButton('input#save-me', function(error, browser) {
-            expect(browser.location.pathname).toBe('/save-my-mood');
-            return jasmine.asyncSpecDone();
-          });
         });
       });
     });

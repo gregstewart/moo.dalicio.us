@@ -1,0 +1,14 @@
+
+h1= title
+
+div
+    form(method="post", action="/sign-in")
+        input(type="text", name="email", placeholder="Email address", id="email", value="")
+        input(type="password", name="password", id="password", value="")
+        input(type="submit", value="Sign in", id="sign-in-btn")
+
+div
+    form(method="post", action="/sign-up")
+        input(type="text", name="email", placeholder="Email address", id="email", value="")
+        input(type="password", name="password", id="password", value="")
+        input(type="submit", value="Sign up", id="sign-up-btn")
