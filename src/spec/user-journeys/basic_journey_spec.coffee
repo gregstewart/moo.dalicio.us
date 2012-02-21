@@ -13,14 +13,16 @@ describe 'basic user journey test', ->
         jasmine.asyncSpecDone()
 
     it 'should redirect to log in if not logged in', ->
-      # do nothing for now
-
+      whenPageHasLoaded 'http://localhost:3000/', ->
+        expect(browser.location.pathname).toBe('/not-logged-in')
+        jasmine.asyncSpecDone()
 
     describe 'login process', ->
       it 'should visit the signin page', ->
-        whenPageHasLoaded 'http://localhost:3000/sign-in', ->
-          expect( browser.text('title') ).toBe('Sign in process')
-          jasmine.asyncSpecDone()
+        whenPageHasLoaded 'http://localhost:3000/not-logged-in', ->
+          browser.pressButton 'button#sign-in-btn' , (error, browser) =>
+            expect(browser.location.pathname).toBe('/sign-in')
+            jasmine.asyncSpecDone()
 
     describe 'signup process', ->
       it 'should visit the signup page', ->
@@ -36,8 +38,8 @@ describe 'basic user journey test', ->
 
     it 'should have a link to take me to capture my mood', ->
       whenPageHasLoaded 'http://localhost:3000/', ->
-            expect( browser.text('a:last') ).toBe('How are you feeling today?')
-            jasmine.asyncSpecDone()
+        expect( browser.text('a:last') ).toBe('How are you feeling today?')
+        jasmine.asyncSpecDone()
 
     it 'clicking on the link should take you to the slider page', ->
       whenPageHasLoaded 'http://localhost:3000/', ->

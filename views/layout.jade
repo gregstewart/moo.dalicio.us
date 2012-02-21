@@ -24,9 +24,13 @@ html
                 a(href='/about') About
               li
                 a(href='/contact') Contact
+            - if (typeof session.user !== 'undefined')
+                p.navbar-text.pull-right Logged in as
+                  a(href='#') username
 
     .container!=body
 
+       hr
        footer
          p &copy; Company 2012
 

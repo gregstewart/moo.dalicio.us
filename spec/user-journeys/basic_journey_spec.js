@@ -12,12 +12,20 @@
           return jasmine.asyncSpecDone();
         });
       });
-      it('should redirect to log in if not logged in', function() {});
+      it('should redirect to log in if not logged in', function() {
+        return whenPageHasLoaded('http://localhost:3000/', function() {
+          expect(browser.location.pathname).toBe('/not-logged-in');
+          return jasmine.asyncSpecDone();
+        });
+      });
       describe('login process', function() {
         return it('should visit the signin page', function() {
-          return whenPageHasLoaded('http://localhost:3000/sign-in', function() {
-            expect(browser.text('title')).toBe('Sign in process');
-            return jasmine.asyncSpecDone();
+          return whenPageHasLoaded('http://localhost:3000/not-logged-in', function() {
+            var _this = this;
+            return browser.pressButton('button#sign-in-btn', function(error, browser) {
+              expect(browser.location.pathname).toBe('/sign-in');
+              return jasmine.asyncSpecDone();
+            });
           });
         });
       });

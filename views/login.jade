@@ -1,14 +1,27 @@
 
 h1= title
 
-div
-    form(method='post', action='/sign-in')
-        input(type='text', name='email', placeholder='Email address', id='email', value='')
-        input(type='password', name='password', id='password', value='')
-        input(type='submit', value='Sign in', id='sign-in-btn')
+.row
+    .span6
+        form(method='post', action='/sign-in', class='well')
+            fieldset
+                legend Sign in
+                label(for='email') Email
+                input(type='text', name='email', placeholder='Email address', id='email', value='')
+                label(for='password') Password
+                input(type='password', name='password', id='password', value='')
+                br
+                button(type='submit', id='sign-in-btn', class='btn') Sign in
 
-div
-    form(method='post', action='/sign-up')
-        input(type='text', name='email', placeholder='Email address', id='email', value='')
-        input(type='password', name='password', id='password', value='')
-        input(type='submit', value='Sign up', id='sign-up-btn')
+    .span6
+        form(method='post', action='/sign-up', class='well')
+            fieldset
+                legend Sign up
+                label(for='email') Email
+                input(type='text', name='email', placeholder='Email address', id='email', value='')
+                label(for='password') Password
+                input(type='password', name='password', id='password', value='')
+                label(for='verify-password') Verify password
+                input(type='password', name='verify-password', id='verify-password', value='')
+                br
+                button(type='submit', id='sign-up-btn', class='btn') Sign up
