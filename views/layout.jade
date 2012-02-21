@@ -36,15 +36,35 @@ html
     script(src='/javascripts/lib/smiley-slider.js')
     script
         $(document).ready(function() {
-            var s = new SmileySlider(document.getElementById('slider'));
+            if ($('#slider').length) {
 
-            s.position(0); // make it sad
-            s.position(1); // make it happy
+                var s = new SmileySlider(document.getElementById('slider'));
 
-            var p = s.position(); // get it's position
-            s.position(p / 2); // make it half as happy
+                s.position(0); // make it sad
+                s.position(1); // make it happy
 
-            s.position(function (p) {
-                // do something when it changes
-            });
+                var p = s.position(); // get it's position
+                s.position(p / 2); // make it half as happy
+
+                s.position(function (p) {
+                    // do something when it changes
+                    $('input#mood-value').prop('value', p);
+                });
+            }
         });
+
+//            var opts = {
+//              lines: 12, // The number of lines to draw
+//              length: 0, // The length of each line
+//              width: 9, // The line thickness
+//              radius: 21, // The radius of the inner circle
+//              color: '#000', // #rgb or #rrggbb
+//              speed: 1, // Rounds per second
+//              trail: 86, // Afterglow percentage
+//              shadow: true, // Whether to render a shadow
+//              hwaccel: false // Whether to use hardware acceleration
+//            };
+//            var target = document.getElementById('spinner');
+//            var spinner = new Spinner(opts);
+//            spinner.spin(target);
+//            spinner.stop();

@@ -3,6 +3,5 @@ h1= title
 
 form(method="post", action="/save-my-mood")
     #slider
-
-    input(type="submit", value="save me")
-
+    input(type="hidden", name="mood-value", id="mood-value", value="")
+    input(type="submit", value="save me", id="save-me")

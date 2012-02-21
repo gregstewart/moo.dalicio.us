@@ -4,6 +4,7 @@
     var Browser, browser, jasmine, whenPageHasLoaded;
     Browser = require('zombie');
     jasmine = require('jasmine-node');
+    Browser.debug = true;
     browser = new Browser();
     describe('visit the homepage', function() {
       it('should visit homepage', function() {
@@ -44,7 +45,7 @@
       return it('should submit my mood', function() {
         return whenPageHasLoaded('http://localhost:3000/how-are-you-feeling', function() {
           var _this = this;
-          return browser.pressButton('save me', function(error, browser) {
+          return browser.pressButton('input#save-me', function(error, browser) {
             expect(browser.location.pathname).toBe('/save-my-mood');
             return jasmine.asyncSpecDone();
           });
