@@ -2,9 +2,9 @@
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.min.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.min.css')
 
   body
 
@@ -15,15 +15,15 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand(href="#")= project
+          a.brand(href='#')= project
           .nav-collapse
             ul.nav
               li.active
-                a(href="/") Home
+                a(href='/') Home
               li
-                a(href="/about") About
+                a(href='/about') About
               li
-                a(href="/contact") Contact
+                a(href='/contact') Contact
 
     .container!=body
 
