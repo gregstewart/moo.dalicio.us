@@ -18,48 +18,13 @@
           return jasmine.asyncSpecDone();
         });
       });
-      describe('login process', function() {
-        return it('should visit the signin page', function() {
-          return whenPageHasLoaded('http://localhost:3000/not-logged-in', function() {
-            var _this = this;
-            return browser.pressButton('button#sign-in-btn', function(error, browser) {
-              expect(browser.location.pathname).toBe('/sign-in');
-              return jasmine.asyncSpecDone();
-            });
-          });
-        });
-      });
-      return describe('signup process', function() {
-        return it('should visit the signup page', function() {
-          return whenPageHasLoaded('http://localhost:3000/sign-up', function() {
-            expect(browser.text('title')).toBe('Sign up process');
-            return jasmine.asyncSpecDone();
-          });
-        });
-      });
+      describe('login process', function() {});
+      return describe('signup process', function() {});
     });
     describe('visit the homepage', function() {
-      it('should visit homepage', function() {
-        return whenPageHasLoaded('http://localhost:3000/', function() {
-          expect(browser.text('title')).toBe('What\s my mood??');
-          return jasmine.asyncSpecDone();
-        });
-      });
-      it('should have a link to take me to capture my mood', function() {
-        return whenPageHasLoaded('http://localhost:3000/', function() {
-          expect(browser.text('a:last')).toBe('How are you feeling today?');
-          return jasmine.asyncSpecDone();
-        });
-      });
-      return it('clicking on the link should take you to the slider page', function() {
-        return whenPageHasLoaded('http://localhost:3000/', function() {
-          var _this = this;
-          return browser.clickLink('a:last', function(error, browser) {
-            expect(browser.location.pathname).toBe('/how-are-you-feeling');
-            return jasmine.asyncSpecDone();
-          });
-        });
-      });
+      it('should visit homepage', function() {});
+      it('should have a link to take me to capture my mood', function() {});
+      return it('clicking on the link should take you to the slider page', function() {});
     });
     describe('creating a project', function() {
       return it('should visit the create project page', function() {

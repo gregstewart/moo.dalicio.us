@@ -1,16 +1,5 @@
-authenticateUser = function(email, password) {
-    console.log('[authenticate] Starting auth for ' + email + ' with password ' + password);
-
-    if (email === 'gregs@tcias.co.uk' && password === 'test') {
-        return true;
-    } else {
-        return false;
-    }
-};
-
-isValidEmail = function(email) {
-    return true;
-}
+var Authenticate = require('../app/Authenticate').Authenticate;
+var auth = new Authenticate();
 
 /*
  * GET home page.
@@ -34,7 +23,7 @@ exports.notLoggedIn = function(req, res){
  * POST sign in page.
  */
 exports.signIn = function(req, res){
-    if (authenticateUser(req.body.email, req.body.password)) {
+    if ( auth.checkUser(req.body.email, req.body.password) ) {
         req.session.regenerate(function(){
             req.session.cookie.maxAge = 100 * 24 * 60 * 60 * 1000; //Force longer cookie age
             req.session.cookie.httpOnly = false;
@@ -55,8 +44,7 @@ exports.signUp = function(req, res){
     var email = req.body.email,
         password = req.body['password'],
         verifyPassword = req.body['verify-password'];
-    console.log();
-    if ( isValidEmail(email) && (password === verifyPassword) ) {
+    if ( auth.isValidEmail(email) && (password === verifyPassword) ) {
     req.session.regenerate(function(){
         req.session.cookie.maxAge = 100 * 24 * 60 * 60 * 1000; //Force longer cookie age
         req.session.cookie.httpOnly = false;
@@ -68,7 +56,6 @@ exports.signUp = function(req, res){
     req.session.error = 'Sign up failed. Please make your sure you provided a valid email address and that your passwords matched.';
     res.redirect('back');
   }
-
 };
 
 /*
