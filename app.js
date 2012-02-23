@@ -43,7 +43,7 @@ app.get('/how-are-you-feeling', routes.how);
 app.get('/create-project', routes.createProject);
 
 app.post('/sign-in', routes.signIn);
-//app.post('/sign-up', routes.signUp);
+app.post('/sign-up', routes.signUp);
 app.post('/save-my-mood', routes.saveMood);
 
 app.listen(3000);

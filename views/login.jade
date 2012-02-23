@@ -1,5 +1,10 @@
-
 h1= title
+
+- if (typeof session.error)
+    .row
+        .span12.alert.alert-error
+            a(class="close", data-dismiss="alert") x
+            p= session.error
 
 .row
     .span6

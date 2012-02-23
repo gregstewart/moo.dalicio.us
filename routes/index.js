@@ -8,6 +8,10 @@ authenticateUser = function(email, password) {
     }
 };
 
+isValidEmail = function(email) {
+    return true;
+}
+
 /*
  * GET home page.
  */
@@ -34,7 +38,7 @@ exports.signIn = function(req, res){
         req.session.regenerate(function(){
             req.session.cookie.maxAge = 100 * 24 * 60 * 60 * 1000; //Force longer cookie age
             req.session.cookie.httpOnly = false;
-            req.session.user = 'user';
+            req.session.user = req.body.email;
 
             res.redirect('/');
         });
@@ -42,15 +46,29 @@ exports.signIn = function(req, res){
         req.session.error = 'Authentication failed, please check your username and password.';
         res.redirect('back');
     }
-
-  //res.render('signIn', { project: 'What\s my mood??', title: 'Sign in process' })
 };
 
 /*
  * POST sign up page.
  */
 exports.signUp = function(req, res){
-  res.render('signUp', { project: 'What\s my mood??', title: 'Sign up process' })
+    var email = req.body.email,
+        password = req.body['password'],
+        verifyPassword = req.body['verify-password'];
+    console.log();
+    if ( isValidEmail(email) && (password === verifyPassword) ) {
+    req.session.regenerate(function(){
+        req.session.cookie.maxAge = 100 * 24 * 60 * 60 * 1000; //Force longer cookie age
+        req.session.cookie.httpOnly = false;
+        req.session.user = req.body.email;
+        req.session.signUpMessage = 'Congratulations, you are now ready to post your mood!';
+        res.redirect('/');
+    });
+  } else {
+    req.session.error = 'Sign up failed. Please make your sure you provided a valid email address and that your passwords matched.';
+    res.redirect('back');
+  }
+
 };
 
 /*
