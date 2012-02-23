@@ -14,4 +14,11 @@ class Authenticate
 
     return true
 
+  createUserSession: (session, email) ->
+    session.regenerate( ->
+        session.cookie.maxAge = 100 * 24 * 60 * 60 * 1000; #Force longer cookie age
+        session.cookie.httpOnly = false;
+        session.user = email;
+    )
+
 exports.Authenticate = Authenticate

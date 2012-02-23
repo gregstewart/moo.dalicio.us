@@ -21,6 +21,14 @@
       return true;
     };
 
+    Authenticate.prototype.createUserSession = function(session, email) {
+      return session.regenerate(function() {
+        session.cookie.maxAge = 100 * 24 * 60 * 60 * 1000;
+        session.cookie.httpOnly = false;
+        return session.user = email;
+      });
+    };
+
     return Authenticate;
 
   })();
