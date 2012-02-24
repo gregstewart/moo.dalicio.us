@@ -1,4 +1,6 @@
 var Authenticate = require('../app/Authenticate').Authenticate;
+var Mood = require('../app/Mood').Mood;
+
 var auth = new Authenticate();
 
 /*
@@ -60,7 +62,7 @@ exports.how= function(req, res){
  * POST save mood
  */
 exports.saveMood= function(req, res){
-  console.log(req.body);
+  var mood = new Mood(req.session.user, req.body.value, 1)
   res.render('saveMood', { project: 'What\s my mood??', title: 'Mood saved' })
 };
 
