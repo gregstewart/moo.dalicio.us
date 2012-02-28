@@ -10,7 +10,8 @@
         {
           value: 0.5,
           user: 'gregs@tcias.co.uk',
-          project: 'project name'
+          project: 'project name',
+          date: new Date()
         }
       ], function(error, moods) {});
     }

@@ -36,12 +36,6 @@
       });
     });
     describe('capture my mood', function() {
-      it('should visit how I feel page', function() {
-        return whenPageHasLoaded('http://localhost:3000/how-are-you-feeling', function() {
-          expect(browser.text('title')).toBe('How are you today?');
-          return jasmine.asyncSpecDone();
-        });
-      });
       return it('should have a slider element', function() {
         return whenPageHasLoaded('http://localhost:3000/how-are-you-feeling', function() {
           expect(browser.query('#slider'));

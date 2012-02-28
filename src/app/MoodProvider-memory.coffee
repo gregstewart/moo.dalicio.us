@@ -3,7 +3,7 @@ class MoodProvider
   constructor: ->
     @dummyData = []
     @moodCounter = 1
-    @save( [{value:0.5, user:'gregs@tcias.co.uk', project:'project name'}], (error, moods)-> )
+    @save( [{value:0.5, user:'gregs@tcias.co.uk', project:'project name', date: new Date()}], (error, moods)-> )
 
   findAll: (callback) ->
     callback(null, @dummyData)

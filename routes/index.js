@@ -1,8 +1,10 @@
 var Authenticate = require('../app/Authenticate').Authenticate;
 var Mood = require('../app/Mood').Mood;
 var UserProvider = require('../app/UserProvider-memory').UserProvider;
+var MoodProvider = require('../app/MoodProvider-memory').MoodProvider;
 
 var userProvider =  new UserProvider();
+var moodProvider = new MoodProvider();
 var auth = new Authenticate(userProvider);
 
 /*
@@ -31,7 +33,7 @@ exports.signIn = function(req, res){
         auth.createUserSession(req.session, req.body.email);
         res.redirect('/');
     } else {
-        req.session.error = 'Authentication failed, please check your username and password.';
+        req.flash('error', 'Authentication failed, please check your username and password.');
         res.redirect('back');
     }
 };
@@ -59,15 +61,15 @@ exports.signUp = function(req, res){
             if (errors === null) {
                 auth.createUserSession(req.session, email);
 
-                req.session.signUpMessage = 'Congratulations, you are now ready to post your mood!';
+                req.flash('error', 'Congratulations, you are now ready to post your mood!');
                 res.redirect('/');
             } else {
-                req.session.error = 'Sign up failed. Unable to save user details.';
+                req.flash('error', 'Sign up failed. Unable to save user details.');
                 res.redirect('back');
             }
         });
     } else {
-        req.session.error = 'Sign up failed. Please make your sure you provided a valid email address and that your passwords matched.';
+        req.flash('error', 'Sign up failed. Please make your sure you provided a valid email address and that your passwords matched.');
         res.redirect('back');
     }
 };
@@ -75,21 +77,32 @@ exports.signUp = function(req, res){
 /*
  * GET smiley page
  */
-exports.how= function(req, res){
-  res.render('how', { project: 'What\s my mood??', title: 'How are you today?' })
+exports.how = function(req, res) {
+  if (typeof req.session.user === 'undefined') {
+    res.redirect('/not-logged-in');
+  } else {
+    res.render('how', { project: 'What\s my mood??', title: 'How are you today?' })
+  }
 };
 
 /*
  * POST save mood
  */
-exports.saveMood= function(req, res){
-  var mood = new Mood(req.session.user, req.body.value, 1)
-  res.render('saveMood', { project: 'What\s my mood??', title: 'Mood saved' })
+exports.saveMood = function(req, res) {
+  moodProvider.save([{value:req.body.value, user:req.session.user, project:req.body.project, date: new Date()}], function(errors, moods) {
+    if (errors === null) {
+        req.flash('info', 'Mood saved');
+        res.redirect('/')
+    } else {
+        req.flash('error', 'Failed to save mood.');
+        res.redirect('back');
+    }
+  });
 };
 
 /*
  * GET create project page
  */
-exports.createProject= function(req, res){
+exports.createProject = function(req, res) {
   res.render('createProject', { project: 'What\s my mood??', title: 'Create project' })
 };

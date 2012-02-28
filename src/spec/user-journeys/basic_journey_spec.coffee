@@ -56,10 +56,10 @@ describe 'basic user journey test', ->
         jasmine.asyncSpecDone()
 
   describe 'capture my mood', ->
-    it 'should visit how I feel page', ->
-      whenPageHasLoaded 'http://localhost:3000/how-are-you-feeling', ->
-        expect( browser.text('title') ).toBe('How are you today?')
-        jasmine.asyncSpecDone()
+#    it 'should visit how I feel page', ->
+#      whenPageHasLoaded 'http://localhost:3000/how-are-you-feeling', ->
+#        expect( browser.text('title') ).toBe('How are you today?')
+#        jasmine.asyncSpecDone()
 
     it 'should have a slider element', ->
       whenPageHasLoaded 'http://localhost:3000/how-are-you-feeling', ->

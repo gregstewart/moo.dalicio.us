@@ -33,12 +33,23 @@ app.configure('production', function(){
 app.dynamicHelpers({
     session: function (req, res) {
         return req.session;
+    },
+    flashMessages: function(req, res) {
+        var html = '';
+        ['error', 'info'].forEach(function(type) {
+          var messages = req.flash(type);
+          if (messages.length > 0) {
+            html += messages
+          }
+        });
+        return html;
     }
 });
 
 // Routes
 app.get('/', routes.index);
 app.get('/not-logged-in', routes.notLoggedIn);
+
 app.get('/how-are-you-feeling', routes.how);
 app.get('/create-project', routes.createProject);
 
