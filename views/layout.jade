@@ -30,9 +30,10 @@ html
                     &nbsp;|&nbsp;
                     a(href='/sign-out') Sign out
 
-    #{flashMessages}
+    .container
+       !{flashMessages}
 
-    .container!=body
+       !=body
 
        hr
        footer

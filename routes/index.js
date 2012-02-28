@@ -61,7 +61,7 @@ exports.signUp = function(req, res){
             if (errors === null) {
                 auth.createUserSession(req.session, email);
 
-                req.flash('error', 'Congratulations, you are now ready to post your mood!');
+                req.flash('info', 'Congratulations, you are now ready to post your mood!');
                 res.redirect('/');
             } else {
                 req.flash('error', 'Sign up failed. Unable to save user details.');

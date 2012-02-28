@@ -35,11 +35,17 @@ app.dynamicHelpers({
         return req.session;
     },
     flashMessages: function(req, res) {
+        // http://dailyjs.com/2011/01/03/node-tutorial-8/
         var html = '';
         ['error', 'info'].forEach(function(type) {
           var messages = req.flash(type);
           if (messages.length > 0) {
-            html += messages
+            html += '<div class="row">';
+            html += '<div class="span12 alert alert-' + type + '">';
+            html += '<a class="close" data-dismiss="alert">x</a>';
+            html += '<p>' + messages +'</p>';
+            html += '</div>';
+            html += '</div>';
           }
         });
         return html;
