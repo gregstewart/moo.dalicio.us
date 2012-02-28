@@ -27,6 +27,7 @@ html
             - if (typeof session.user !== 'undefined')
                 p(class='navbar-text pull-right') Logged in as &nbsp;
                     a(href='/account')= session.user
+                    &nbsp;|&nbsp;
                     a(href='/sign-out') Sign out
 
     .container!=body
