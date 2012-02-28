@@ -9,7 +9,7 @@ describe 'basic user journey test', ->
 
     it 'visit the not logged in page', ->
       whenPageHasLoaded 'http://localhost:3000/not-logged-in', ->
-        expect( browser.text('title') ).toBe('Not looged in')
+        expect( browser.text('title') ).toBe('Not logged in')
         jasmine.asyncSpecDone()
 
     it 'should redirect to log in if not logged in', ->
@@ -29,6 +29,8 @@ describe 'basic user journey test', ->
 #        whenPageHasLoaded 'http://localhost:3000/sign-up', ->
 #          expect( browser.text('title') ).toBe('Sign up process')
 #          jasmine.asyncSpecDone()
+
+    describe 'signout process', ->
 
   describe 'visit the homepage', ->
     it 'should visit homepage', ->

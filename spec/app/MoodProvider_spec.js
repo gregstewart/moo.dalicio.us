@@ -1,7 +1,7 @@
 (function() {
   var MoodProvider;
 
-  MoodProvider = require('../../app/MoodProvider').MoodProvider;
+  MoodProvider = require('../../app/MoodProvider-memory').MoodProvider;
 
   describe('MoodProvider tests', function() {
     it('should save some results to memory', function() {
@@ -28,9 +28,13 @@
       moodProvider = new MoodProvider;
       moodProvider.save([
         {
-          value: 0.75
+          value: 0.75,
+          user: 'gregs@tcias.co.uk',
+          project: 'project name'
         }, {
-          value: 0.2
+          value: 0.2,
+          user: 'gregs@tcias.co.uk',
+          project: 'project name'
         }
       ], function(error, moods) {});
       return moodProvider.findAll(function(error, docs) {

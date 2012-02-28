@@ -8,7 +8,7 @@
     describe('visit log in/sign up page', function() {
       it('visit the not logged in page', function() {
         return whenPageHasLoaded('http://localhost:3000/not-logged-in', function() {
-          expect(browser.text('title')).toBe('Not looged in');
+          expect(browser.text('title')).toBe('Not logged in');
           return jasmine.asyncSpecDone();
         });
       });
@@ -19,7 +19,8 @@
         });
       });
       describe('login process', function() {});
-      return describe('signup process', function() {});
+      describe('signup process', function() {});
+      return describe('signout process', function() {});
     });
     describe('visit the homepage', function() {
       it('should visit homepage', function() {});

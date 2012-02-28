@@ -1,7 +1,9 @@
 var Authenticate = require('../app/Authenticate').Authenticate;
 var Mood = require('../app/Mood').Mood;
+var UserProvider = require('../app/UserProvider-memory').UserProvider;
 
-var auth = new Authenticate();
+var userProvider =  new UserProvider();
+var auth = new Authenticate(userProvider);
 
 /*
  * GET home page.
@@ -18,7 +20,7 @@ exports.index = function(req, res){
  * GET login page.
  */
 exports.notLoggedIn = function(req, res){
-  res.render('login', { project: 'What\s my mood??', title: 'Not looged in' })
+  res.render('login', { project: 'What\s my mood??', title: 'Not logged in' })
 };
 
 /*
@@ -35,6 +37,16 @@ exports.signIn = function(req, res){
 };
 
 /*
+ * GET sign out page.
+ */
+exports.signOut = function(req, res){
+    auth.destroySession(req.session);
+    res.clearCookie('auth');
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    res.redirect('/');
+};
+
+/*
  * POST sign up page.
  */
 exports.signUp = function(req, res){
@@ -42,10 +54,19 @@ exports.signUp = function(req, res){
         password = req.body['password'],
         verifyPassword = req.body['verify-password'];
     if ( auth.isValidEmail(email) && (password === verifyPassword) ) {
-        auth.createUserSession(req.session, req.body.email);
-        req.session.signUpMessage = 'Congratulations, you are now ready to post your mood!';
-        res.redirect('/');
-} else {
+        console.log(UserProvider);
+        userProvider.save([{user:email, password:password}], function(errors, users) {
+            if (errors === null) {
+                auth.createUserSession(req.session, email);
+
+                req.session.signUpMessage = 'Congratulations, you are now ready to post your mood!';
+                res.redirect('/');
+            } else {
+                req.session.error = 'Sign up failed. Unable to save user details.';
+                res.redirect('back');
+            }
+        });
+    } else {
         req.session.error = 'Sign up failed. Please make your sure you provided a valid email address and that your passwords matched.';
         res.redirect('back');
     }

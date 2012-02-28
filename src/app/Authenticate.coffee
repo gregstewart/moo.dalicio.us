@@ -1,11 +1,12 @@
 class Authenticate
-  constructor: ->
+  constructor: (@userProvider) ->
 
   checkUser: (email, password) ->
-    if email == 'gregs@tcias.co.uk' && password == 'test'
-      return true
-    else
-      return false
+    @userProvider.findByUsername email, (error, user) ->
+      if email == user.user && password == user.password
+        return true
+      else
+        return false
 
   isValidEmail: (email) ->
     pattern = /\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\b/
@@ -20,5 +21,9 @@ class Authenticate
         session.cookie.httpOnly = false;
         session.user = email;
     )
+
+  destroySession: (session) ->
+    session.auth = null
+    session.destroy ->
 
 exports.Authenticate = Authenticate

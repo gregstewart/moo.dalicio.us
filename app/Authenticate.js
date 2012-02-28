@@ -3,14 +3,18 @@
 
   Authenticate = (function() {
 
-    function Authenticate() {}
+    function Authenticate(userProvider) {
+      this.userProvider = userProvider;
+    }
 
     Authenticate.prototype.checkUser = function(email, password) {
-      if (email === 'gregs@tcias.co.uk' && password === 'test') {
-        return true;
-      } else {
-        return false;
-      }
+      return this.userProvider.findByUsername(email, function(error, user) {
+        if (email === user.user && password === user.password) {
+          return true;
+        } else {
+          return false;
+        }
+      });
     };
 
     Authenticate.prototype.isValidEmail = function(email) {
@@ -27,6 +31,11 @@
         session.cookie.httpOnly = false;
         return session.user = email;
       });
+    };
+
+    Authenticate.prototype.destroySession = function(session) {
+      session.auth = null;
+      return session.destroy(function() {});
     };
 
     return Authenticate;

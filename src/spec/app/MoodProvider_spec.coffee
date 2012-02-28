@@ -1,4 +1,4 @@
-MoodProvider = require('../../app/MoodProvider').MoodProvider
+MoodProvider = require('../../app/MoodProvider-memory').MoodProvider
 
 describe 'MoodProvider tests', ->
   it 'should save some results to memory', ->
@@ -19,7 +19,8 @@ describe 'MoodProvider tests', ->
 
   it 'should save 2 additional records', ->
     moodProvider = new MoodProvider
-    moodProvider.save( [{value:0.75},{value:0.2}], (error, moods)-> )
+    moodProvider.save( [{value:0.75, user:'gregs@tcias.co.uk', project:'project name'},
+                        {value:0.2, user:'gregs@tcias.co.uk', project:'project name'}], (error, moods)-> )
     moodProvider.findAll((error, docs) ->
       expect(docs.length).toBe(3)
     )
