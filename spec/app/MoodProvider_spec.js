@@ -12,7 +12,8 @@
         {
           value: 0.75,
           user: 'gregs@tcias.co.uk',
-          project: 'project name'
+          project: 'project name',
+          dateAdded: new Date()
         }
       ], function(error, moods) {});
     });
@@ -29,11 +30,13 @@
         {
           value: 0.5,
           user: 'gregs@tcias.co.uk',
-          project: 'project name'
+          project: 'project name',
+          dateAdded: new Date()
         }, {
           value: 0.2,
           user: 'gregs@tcias.co.uk',
-          project: 'project name'
+          project: 'project name',
+          dateAdded: new Date()
         }
       ], function(error, moods) {});
       return moodProvider.findAll(function(error, docs) {
@@ -53,15 +56,18 @@
           {
             value: 0.75,
             user: 'gregs@tcias.co.uk',
-            project: 'project name'
+            project: 'project name',
+            dateAdded: new Date()
           }, {
             value: 0.2,
             user: 'gregs@tcias.co.uk',
-            project: 'project name'
+            project: 'project name',
+            dateAdded: new Date()
           }, {
             value: 0.3,
             user: 'test@test.com',
-            project: 'project name'
+            project: 'project name',
+            dateAdded: new Date()
           }
         ], function(error, moods) {});
       });

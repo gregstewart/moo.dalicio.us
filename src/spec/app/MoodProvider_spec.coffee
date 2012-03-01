@@ -5,7 +5,7 @@ describe 'MoodProvider tests', ->
 
   beforeEach ->
     moodProvider = new MoodProvider
-    moodProvider.save( [{value:0.75, user:'gregs@tcias.co.uk', project:'project name'}], (error, moods)-> )
+    moodProvider.save( [{value:0.75, user:'gregs@tcias.co.uk', project:'project name', dateAdded: new Date()}], (error, moods)-> )
 
   it 'should save one result to memory', ->
     expect(moodProvider.dummyData.length).toBe(1)
@@ -16,8 +16,8 @@ describe 'MoodProvider tests', ->
     )
 
   it 'should save 2 additional records', ->
-    moodProvider.save( [{value:0.5, user:'gregs@tcias.co.uk', project:'project name'},
-                        {value:0.2, user:'gregs@tcias.co.uk', project:'project name'}], (error, moods)-> )
+    moodProvider.save( [{value:0.5, user:'gregs@tcias.co.uk', project:'project name', dateAdded: new Date()},
+                        {value:0.2, user:'gregs@tcias.co.uk', project:'project name', dateAdded: new Date()}], (error, moods)-> )
     moodProvider.findAll((error, docs) ->
       expect(docs.length).toBe(3)
     )
@@ -31,9 +31,9 @@ describe 'MoodProvider tests', ->
     moodProvider = null
     beforeEach ->
       moodProvider = new MoodProvider
-      moodProvider.save( [{value:0.75, user:'gregs@tcias.co.uk', project:'project name'},
-                        {value:0.2, user:'gregs@tcias.co.uk', project:'project name'}
-                        {value:0.3, user:'test@test.com', project:'project name'}], (error, moods)-> )
+      moodProvider.save( [{value:0.75, user:'gregs@tcias.co.uk', project:'project name', dateAdded: new Date()},
+                        {value:0.2, user:'gregs@tcias.co.uk', project:'project name', dateAdded: new Date()}
+                        {value:0.3, user:'test@test.com', project:'project name', dateAdded: new Date()}], (error, moods)-> )
 
     it 'should return 2 records', ->
       moodProvider.findByUsername 'gregs@tcias.co.uk', (error, docs) ->
