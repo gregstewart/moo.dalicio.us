@@ -43,6 +43,8 @@ html
     script(src='/javascripts/lib/jquery-1.7.1.min.js')
     script(src='/javascripts/lib/bootstrap.min.js')
     script(src='/javascripts/lib/smiley-slider.js')
+    script(src='/javascripts/lib/raphael-2.0.2.min.js')
+    script(src='/javascripts/lib/morris-0.2.3.min.js')
     script
         $(document).ready(function() {
             if ($('#slider').length) {
@@ -58,6 +60,25 @@ html
                 s.position(function (p) {
                     // do something when it changes
                     $('input#mood-value').prop('value', p);
+                });
+            }
+
+            if ($('#annual').length) {
+                // annual data
+                Morris.Line({
+                  element: 'annual',
+                  data: [
+                    {y: '2012-03-01', a: 100},
+                    {y: '2012-02-01', a: 75},
+                    {y: '2012-01-01', a: 50},
+                    {y: '2011-12-01', a: 75},
+                    {y: '2011-11-01', a: 50},
+                    {y: '2011-10-01', a: 75},
+                    {y: '2011-09-01', a: 100}
+                  ],
+                  xkey: 'y',
+                  ykeys: ['a'],
+                  labels: ['Your mood']
                 });
             }
         });
