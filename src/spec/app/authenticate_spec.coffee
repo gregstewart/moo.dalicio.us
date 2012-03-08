@@ -22,3 +22,17 @@ describe 'test authentication module', ->
 
     it 'should return false if email is invalid', ->
       expect(testAuthenticateObject.isValidEmail('testtest.com')).toBeFalsy()
+
+  describe 'check for existing user', ->
+
+    it 'should return true because user already exists', ->
+      expect( testAuthenticateObject.checkUserExists('test@test.com') ).toBeTruthy()
+
+    it 'should return false because user does not exists', ->
+      expect( testAuthenticateObject.checkUserExists('test2@test.com') ).toBeFalsy()
+
+    it 'should return false because no user exists', ->
+      anotherUserProvider = new UserProvider
+      anotherAuthenticateObject = new Authenticate anotherUserProvider
+      expect( anotherUserProvider.dummyData.length).toBe(0)
+      expect( anotherAuthenticateObject.checkUserExists('test2@test.com') ).toBeFalsy()

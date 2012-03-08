@@ -9,11 +9,15 @@
 
     Authenticate.prototype.checkUser = function(email, password) {
       return this.userProvider.findByUsername(email, function(error, user) {
-        if (email === user.user && password === user.password) {
-          return true;
-        } else {
-          return false;
-        }
+        if (email === user.user && password === user.password) return true;
+        return false;
+      });
+    };
+
+    Authenticate.prototype.checkUserExists = function(email) {
+      return this.userProvider.findByUsername(email, function(error, user) {
+        if (typeof user.user === 'object' || user === null) return false;
+        return true;
       });
     };
 

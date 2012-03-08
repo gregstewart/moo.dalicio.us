@@ -3,10 +3,15 @@ class Authenticate
 
   checkUser: (email, password) ->
     @userProvider.findByUsername email, (error, user) ->
-      if email == user.user && password == user.password
-        return true
-      else
-        return false
+      if email == user.user && password == user.password then return true
+
+      return false
+
+  checkUserExists: (email) ->
+    @userProvider.findByUsername email, (error, user) ->
+      if typeof user.user == 'object' || user == null then return false
+
+      return true
 
   isValidEmail: (email) ->
     pattern = /\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\b/

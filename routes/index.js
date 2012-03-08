@@ -1,5 +1,4 @@
 var Authenticate = require('../app/Authenticate').Authenticate;
-var Mood = require('../app/Mood').Mood;
 var UserProvider = require('../app/UserProvider-memory').UserProvider;
 var MoodProvider = require('../app/MoodProvider-memory').MoodProvider;
 
@@ -55,19 +54,24 @@ exports.signUp = function(req, res){
     var email = req.body.email,
         password = req.body['password'],
         verifyPassword = req.body['verify-password'];
-    if ( auth.isValidEmail(email) && (password === verifyPassword) ) {
-        console.log(UserProvider);
-        userProvider.save([{user:email, password:password}], function(errors, users) {
-            if (errors === null) {
-                auth.createUserSession(req.session, email);
 
-                req.flash('info', 'Congratulations, you are now ready to post your mood!');
-                res.redirect('/');
-            } else {
-                req.flash('error', 'Sign up failed. Unable to save user details.');
-                res.redirect('back');
-            }
-        });
+    if ( auth.isValidEmail(email) && (password === verifyPassword) ) {
+        if ( auth.checkUserExists(email) === false || auth.checkUserExists(email) === undefined ) {
+            userProvider.save( [ {user:email, password:password} ], function(errors, users) {
+                if (errors === null) {
+                    auth.createUserSession(req.session, email);
+
+                    req.flash('info', 'Congratulations, you are now ready to post your mood!');
+                    res.redirect('/');
+                } else {
+                    req.flash('error', 'Sign up failed. Unable to save user details.');
+                    res.redirect('back');
+                }
+            });
+        } else {
+            req.flash('error', 'Sign up failed. Sorry that username is already in use.');
+            res.redirect('back');
+        }
     } else {
         req.flash('error', 'Sign up failed. Please make your sure you provided a valid email address and that your passwords matched.');
         res.redirect('back');
