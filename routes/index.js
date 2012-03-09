@@ -13,7 +13,7 @@ exports.index = function(req, res){
   if (typeof req.session.user === 'undefined') {
     res.redirect('/not-logged-in');
   } else {
-    res.render('index', { project: 'What\s my mood??', title: 'What\s my mood??' })
+    res.render('index', { project: 'Moo.dalicio.us', title: 'Moo.dalicio.us??' })
   }
 };
 
@@ -21,7 +21,7 @@ exports.index = function(req, res){
  * GET login page.
  */
 exports.notLoggedIn = function(req, res){
-  res.render('login', { project: 'What\s my mood??', title: 'Not logged in' })
+  res.render('login', { project: 'Moo.dalicio.us', title: 'Not logged in' })
 };
 
 /*
@@ -85,7 +85,7 @@ exports.how = function(req, res) {
   if (typeof req.session.user === 'undefined') {
     res.redirect('/not-logged-in');
   } else {
-    res.render('how', { project: 'What\s my mood??', title: 'How are you today?' })
+    res.render('how', { project: 'Moo.dalicio.us', title: 'How are you today?' })
   }
 };
 
@@ -98,7 +98,7 @@ exports.saveMood = function(req, res) {
         req.flash('info', 'Mood saved');
         res.redirect('/')
     } else {
-        req.flash('error', 'Failed to save mood.');
+        req.flash('error', 'Failed to save your mood.');
         res.redirect('back');
     }
   });
@@ -108,5 +108,5 @@ exports.saveMood = function(req, res) {
  * GET create project page
  */
 exports.createProject = function(req, res) {
-  res.render('createProject', { project: 'What\s my mood??', title: 'Create project' })
+  res.render('createProject', { project: 'Moo.dalicio.us', title: 'Create project' })
 };
