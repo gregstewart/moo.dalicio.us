@@ -56,6 +56,8 @@ app.dynamicHelpers({
 app.get('/', routes.index);
 app.get('/not-logged-in', routes.notLoggedIn);
 
+app.get('/get/moods', routes.getMoods);
+
 app.get('/how-are-you-feeling', routes.how);
 app.get('/create-project', routes.createProject);
 

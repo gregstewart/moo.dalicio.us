@@ -39,14 +39,35 @@ html
        footer
          p &copy; Company 2012
 
-
     script(src='/javascripts/lib/jquery-1.7.1.min.js')
     script(src='/javascripts/lib/bootstrap.min.js')
     script(src='/javascripts/lib/smiley-slider.js')
     script(src='/javascripts/lib/raphael-2.0.2.min.js')
     script(src='/javascripts/lib/morris-0.2.3.min.js')
+    script(src='/javascripts/Mood.js')
     script
         $(document).ready(function() {
+            var moodLoader = new Mood();
+
+            successLoad = function(data) {
+                if (data.length >0) {
+                    if ($('#mood-line').length && data.length > 0) {
+                        // annual data
+                        Morris.Line({
+                          element: 'mood-line',
+                          data: data,
+                          xkey: 'y',
+                          ykeys: ['a'],
+                          labels: ['Your mood'],
+                          ymax: 100,
+                          ymin:0
+                        });
+                    }
+                }
+            }
+
+            moodLoader.getMoods(successLoad)
+
             if ($('#slider').length) {
 
                 var s = new SmileySlider(document.getElementById('slider'));
@@ -63,25 +84,10 @@ html
                 });
             }
 
-            if ($('#mood-line').length) {
-                // annual data
-                Morris.Line({
-                  element: 'mood-line',
-                  data: [
-                    {y: '2012-03-01', a: 100},
-                    {y: '2012-02-01', a: 75},
-                    {y: '2012-01-01', a: 50},
-                    {y: '2011-12-01', a: 75},
-                    {y: '2011-11-01', a: 50},
-                    {y: '2011-10-01', a: 75},
-                    {y: '2011-09-01', a: 100}
-                  ],
-                  xkey: 'y',
-                  ykeys: ['a'],
-                  labels: ['Your mood']
-                });
-            }
         });
+
+//
+
 
 //            var opts = {
 //              lines: 12, // The number of lines to draw

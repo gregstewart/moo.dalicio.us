@@ -13,7 +13,21 @@ exports.index = function(req, res){
   if (typeof req.session.user === 'undefined') {
     res.redirect('/not-logged-in');
   } else {
-    res.render('index', { project: 'Moo.dalicio.us', title: 'Moo.dalicio.us??' })
+    res.render('index', { project: 'Moo.dalicio.us', title: 'Moo.dalicio.us!'});
+  }
+};
+
+exports.getMoods = function(req, res) {
+  if (typeof req.session.user !== 'undefined') {
+    moodProvider.findByUsername(req.session.user, function(error, moods) {
+        var data = [];
+        for (var i = 0; i < moods.length; i++) {
+            data.push( {y: moods[i].date, a: moods[i].value*100} );
+        }
+        res.json(data);
+    });
+  } else {
+     res.send(403);
   }
 };
 
@@ -93,7 +107,8 @@ exports.how = function(req, res) {
  * POST save mood
  */
 exports.saveMood = function(req, res) {
-  moodProvider.save([{value:req.body.value, user:req.session.user, project:req.body.project, date: new Date()}], function(errors, moods) {
+  var mood = req.body.mood;
+  moodProvider.save([{value: mood.value, user: req.session.user, project: mood.project, date: new Date()}], function(errors, moods) {
     if (errors === null) {
         req.flash('info', 'Mood saved');
         res.redirect('/')
