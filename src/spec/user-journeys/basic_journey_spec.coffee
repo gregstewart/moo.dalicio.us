@@ -5,6 +5,13 @@ describe 'basic user journey test', ->
   #Browser.debug = true
   browser = new Browser()
 
+  describe 'visit the spec-runner page', ->
+    it 'should not return any errors', ->
+
+      whenPageHasLoaded 'http://localhost:3000/javascripts/spec/spec-runner.html', ->
+        expect( browser.queryAll('.runner.passed') ).toBeTruthy()
+        jasmine.asyncSpecDone()
+
   describe 'visit log in/sign up page', ->
 
     it 'visit the not logged in page', ->
