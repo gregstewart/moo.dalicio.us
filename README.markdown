@@ -1,4 +1,4 @@
-# Smiley: node.js app
+# Moo.dalicio.us: node.js app
 
 Beginnings of a node.js app to track your mode over the duration of a project. Makes use of a bunch of tools, such node-jasmine, zombie.js, guard, sass and coffee-script. A learning exercise really.
 
