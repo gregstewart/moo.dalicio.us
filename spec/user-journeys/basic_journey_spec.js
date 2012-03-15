@@ -8,6 +8,7 @@
     describe('visit the spec-runner page', function() {
       return it('should not return any errors', function() {
         return whenPageHasLoaded('http://localhost:3000/javascripts/spec/spec-runner.html', function() {
+          expect(browser.response[0]).toBe(200);
           expect(browser.queryAll('.runner.passed')).toBeTruthy();
           return jasmine.asyncSpecDone();
         });
@@ -26,7 +27,9 @@
           return jasmine.asyncSpecDone();
         });
       });
-      describe('login process', function() {});
+      describe('login process', function() {
+        return it('should visit the signin page', function() {});
+      });
       describe('signup process', function() {});
       return describe('signout process', function() {});
     });

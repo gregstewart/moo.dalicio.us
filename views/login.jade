@@ -2,7 +2,7 @@ h1= title
 
 .row
     .span6
-        form(method='post', action='/sign-in', class='well')
+        form(method='post', action='/sign-in', class='well', name='sign-in-form', id='sign-in-form')
             fieldset
                 legend Sign in
                 label(for='email') Email
@@ -13,13 +13,13 @@ h1= title
                 button(type='submit', id='sign-in-btn', class='btn') Sign in
 
     .span6
-        form(method='post', action='/sign-up', class='well')
+        form(method='post', action='/sign-up', class='well', name='sign-up-form', id='sign-up-form')
             fieldset
                 legend Sign up
                 label(for='email') Email
-                input(type='text', name='email', placeholder='Email address', id='email', value='')
+                input(type='text', name='email', placeholder='Email address', id='sign-up-email', value='')
                 label(for='password') Password
-                input(type='password', name='password', id='password', value='')
+                input(type='password', name='password', id='sign-up-password', value='')
                 label(for='verify-password') Verify password
                 input(type='password', name='verify-password', id='verify-password', value='')
                 br

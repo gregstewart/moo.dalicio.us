@@ -9,6 +9,7 @@ describe 'basic user journey test', ->
     it 'should not return any errors', ->
 
       whenPageHasLoaded 'http://localhost:3000/javascripts/spec/spec-runner.html', ->
+        expect( browser.response[0] ).toBe(200)
         expect( browser.queryAll('.runner.passed') ).toBeTruthy()
         jasmine.asyncSpecDone()
 
@@ -25,7 +26,7 @@ describe 'basic user journey test', ->
         jasmine.asyncSpecDone()
 
     describe 'login process', ->
-#      it 'should visit the signin page', ->
+      it 'should visit the signin page', ->
 #        whenPageHasLoaded 'http://localhost:3000/not-logged-in', ->
 #          browser.pressButton 'button#sign-in-btn' , (error, browser) =>
 #            expect(browser.location.pathname).toBe('/sign-in')

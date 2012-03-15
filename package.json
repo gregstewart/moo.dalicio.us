@@ -8,5 +8,6 @@
     , "coffee-script":    ">= 1.2.0"
     , "zombie":           ">= 0.12.14"
     , "jasmine-node":     ">= 1.0.21"
+    , "mongodb":          ">= 0.9.9"
   }
 }
