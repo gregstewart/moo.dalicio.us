@@ -35,17 +35,17 @@ describe 'journeys', ->
         browser.querySelector('#sign-up-btn').type.should.equal 'submit'
         done()
 
-#    it "should sign a user up", (done) ->
-#      browser.visit "http://localhost:3000/not-logged-in/", ->
-#        browser.fill("#sign-up-email", "test@test.com")
-#          .fill("#sign-up-password", "test")
-#          .fill("#verify-password", "test")
-#          .pressButton('Sign up', (err, browser) =>
+#    it 'should sign a user up', (done) ->
+#      browser.visit 'http://localhost:3000/not-logged-in', ->
+#        browser.fill('#sign-up-email', 'test@test.com')
+#          .fill('#sign-up-password', 'test')
+#          .fill('#verify-password', 'test')
+#          .fire('submit','form#sign-up-form', (err, browser) =>
 #            browser.text("title").should.equal 'Moo.dalicio.us!'
 #            done()
 #          )
 
-  describe 'sign in process', ->
+#  describe 'sign in process', ->
 #    it 'should sign a user in', (done) ->
 #      browser.visit 'http://localhost:3000/not-logged-in', ->
 #        browser.fill('email', 'test@test.com')

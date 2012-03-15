@@ -22,7 +22,7 @@
         });
       });
     });
-    describe("log in process", function() {
+    return describe("log in process", function() {
       it('should re-direct a user', function(done) {
         return browser.visit('http://localhost:3000/', function() {
           browser.location.pathname.should.equal('/not-logged-in');
@@ -40,7 +40,6 @@
         });
       });
     });
-    return describe('sign in process', function() {});
   });
 
 }).call(this);
