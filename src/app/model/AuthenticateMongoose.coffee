@@ -1,16 +1,13 @@
 class Authenticate
   constructor: (@userProvider) ->
 
-  checkUser: (email, password) ->
+  checkUser: (email, password, callback) ->
     @userProvider.findByUsername email, (error, user) ->
-      console.log('code: ' + email == user.email && password == user.password)
-      return email == user.email && password == user.password
+      callback email == user.email && password == user.password
 
-  checkUserExists: (email) ->
+  checkUserExists: (email, callback) ->
     @userProvider.findByUsername email, (error, user) ->
-      if typeof user.user == 'object' || user == null then return false
-
-      return true
+      callback user != null
 
   isValidEmail: (email) ->
     pattern = /\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\b/

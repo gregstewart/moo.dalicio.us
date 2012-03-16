@@ -8,15 +8,14 @@
     }
 
     Authenticate.prototype.checkUser = function(email, password, callback) {
-      this.userProvider.findByUsername(email, function(error, user) {
+      return this.userProvider.findByUsername(email, function(error, user) {
         return callback(email === user.email && password === user.password);
       });
     };
 
-    Authenticate.prototype.checkUserExists = function(email) {
+    Authenticate.prototype.checkUserExists = function(email, callback) {
       return this.userProvider.findByUsername(email, function(error, user) {
-        if (typeof user.user === 'object' || user === null) return false;
-        return true;
+        return callback(user !== null);
       });
     };
 
