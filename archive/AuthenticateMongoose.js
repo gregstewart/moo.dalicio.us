@@ -7,16 +7,32 @@
       this.userProvider = userProvider;
     }
 
-    Authenticate.prototype.checkUser = function(email, password, callback) {
-      return this.userProvider.findByUsername(email, function(error, user) {
-        return callback(email === user.email && password === user.password);
+    Authenticate.prototype.getUser = function(username, callback) {
+      return this.userProvider.findByUsername(username, function(error, user) {
+          console.log(user);
+
+          return callback(error, user);
       });
     };
 
-    Authenticate.prototype.checkUserExists = function(email, callback) {
-      return this.userProvider.findByUsername(email, function(error, user) {
-        return callback(user !== null);
+    Authenticate.prototype.checkUser = function(email, password) {
+      var userFound,
+        _this = this;
+      userFound = this.getUser(email, function(error, user) {
+        if (error) throw error;
+        return user;
       });
+      return email === userFound.email && password === userFound.password;
+    };
+
+    Authenticate.prototype.checkUserExists = function(email) {
+      var userFound;
+      userFound = this.getUser(email, function(error, user) {
+          if (error) throw error;
+          return user;
+      });
+
+      return userFound !== null;
     };
 
     Authenticate.prototype.isValidEmail = function(email) {

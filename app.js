@@ -4,8 +4,8 @@
  */
 
 var express = require('express')
-  , routes = require('./routes');
-
+  , routes = require('./routes')
+  , mongoose = require('mongoose');
 
 var app = module.exports = express.createServer();
 
@@ -23,6 +23,7 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
+  mongoose.connect('mongodb://localhost/test');
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 });
 

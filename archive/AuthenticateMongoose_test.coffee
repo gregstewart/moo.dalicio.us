@@ -20,15 +20,18 @@ describe 'test authentication module', ->
       done()
 
   describe 'authentication', ->
-    it 'should not authenticate a user', (done) ->
+    it 'should not authenticate a user',->
       authenticate.checkUser 'test@test.com', 'test2', (result) ->
         expect(result).to.be(false)
-        done()
 
-    it 'should authenticate a user', (done)->
+    it 'should authenticate a user',->
       authenticate.checkUser 'test@test.com', 'test', (result) ->
         expect(result).to.be(true)
-        done()
+
+    it 'should authenticate a user too', ->
+      authenticate.checkUser 'test@test.com', 'test', (result) ->
+        expect(result).to.be(true)
+
 
   describe 'validate email address', ->
     it 'should return true for a valid email address', ->
@@ -39,21 +42,18 @@ describe 'test authentication module', ->
 
   describe 'check for existing user', ->
 
-    it 'should return true because the user already exists', (done) ->
+    it 'should return true because the user already exists', () ->
       authenticate.checkUserExists 'test@test.com', (result) ->
         expect( result ).to.be(true)
-        done()
 
-    it 'should return false because the user does not exist', (done) ->
+    it 'should return false because the user does not exist', () ->
       authenticate.checkUserExists 'test2@test.com', (result) ->
         expect( result ).to.be(false)
-        done()
 
     describe 'no user exists', ->
       beforeEach (done) ->
         User.remove(done)
 
-      it 'should return false', (done) ->
+      it 'should return false', () ->
         authenticate.checkUserExists 'test@test.com', (result) ->
           expect( result ).to.be(false)
-          done()

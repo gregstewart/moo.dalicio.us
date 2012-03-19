@@ -37,16 +37,19 @@
       });
     });
     describe('authentication', function() {
-      it('should not authenticate a user', function(done) {
+      it('should not authenticate a user', function() {
         return authenticate.checkUser('test@test.com', 'test2', function(result) {
-          expect(result).to.be(false);
-          return done();
+          return expect(result).to.be(false);
         });
       });
-      return it('should authenticate a user', function(done) {
+      it('should authenticate a user', function() {
         return authenticate.checkUser('test@test.com', 'test', function(result) {
-          expect(result).to.be(true);
-          return done();
+          return expect(result).to.be(true);
+        });
+      });
+      return it('should authenticate a user too', function() {
+        return authenticate.checkUser('test@test.com', 'test', function(result) {
+          return expect(result).to.be(true);
         });
       });
     });
@@ -59,26 +62,23 @@
       });
     });
     return describe('check for existing user', function() {
-      it('should return true because the user already exists', function(done) {
+      it('should return true because the user already exists', function() {
         return authenticate.checkUserExists('test@test.com', function(result) {
-          expect(result).to.be(true);
-          return done();
+          return expect(result).to.be(true);
         });
       });
-      it('should return false because the user does not exist', function(done) {
+      it('should return false because the user does not exist', function() {
         return authenticate.checkUserExists('test2@test.com', function(result) {
-          expect(result).to.be(false);
-          return done();
+          return expect(result).to.be(false);
         });
       });
       return describe('no user exists', function() {
         beforeEach(function(done) {
           return User.remove(done);
         });
-        return it('should return false', function(done) {
+        return it('should return false', function() {
           return authenticate.checkUserExists('test@test.com', function(result) {
-            expect(result).to.be(false);
-            return done();
+            return expect(result).to.be(false);
           });
         });
       });
