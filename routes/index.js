@@ -1,8 +1,7 @@
 var Utils = require('../app/model/Utils');
-var MoodProvider = require('../app/MoodProvider-memory').MoodProvider;
 var User = require('../app/model/UserMongoose');
+var Mood = require('../app/model/MoodMongoose');
 
-var moodProvider = new MoodProvider();
 var utils = new Utils();
 
 /*
@@ -100,16 +99,21 @@ exports.how = function(req, res) {
  * POST save mood
  */
 exports.saveMood = function(req, res) {
-  var mood = req.body.mood;
-  moodProvider.save([{value: mood.value, user: req.session.user, project: mood.project, date: new Date()}], function(errors, moods) {
-    if (errors === null) {
-        req.flash('info', 'Mood saved');
-        res.redirect('/')
+    if (typeof req.session.user !== 'undefined') {
+      var submittedMood = req.body.mood;
+      var mood = new Mood({value: submittedMood.value, user: req.session.user, project: submittedMood.project});
+      mood.save(function(errors, moods) {
+        if (errors === null) {
+            req.flash('info', 'Mood saved');
+            res.redirect('/')
+        } else {
+            req.flash('error', 'Failed to save your mood.');
+            res.redirect('back');
+        }
+      });
     } else {
-        req.flash('error', 'Failed to save your mood.');
-        res.redirect('back');
+        res.redirect('/not-logged-in');
     }
-  });
 };
 
 /*
@@ -117,13 +121,16 @@ exports.saveMood = function(req, res) {
  */
 exports.getMoods = function(req, res) {
   if (typeof req.session.user !== 'undefined') {
-    moodProvider.findByUsername(req.session.user, function(error, moods) {
-        var data = [];
-        for (var i = 0; i < moods.length; i++) {
-            data.push( {y: moods[i].date, a: moods[i].value*100} );
+    Mood.find( {'user':req.session.user}, function(error, moods) {
+        if (moods !== null) {
+            var data = [];
+            for (var i = 0; i < moods.length; i++) {
+                data.push( {y: moods[i].date, a: moods[i].value*100} );
+            }
+            res.json(data);
         }
-        res.json(data);
     });
+
   } else {
      res.send(403);
   }
