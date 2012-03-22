@@ -10,6 +10,7 @@ var express = require('express')
 var app = module.exports = express.createServer();
 
 // Configuration
+var port = process.env.PORT || 3000;
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -73,7 +74,4 @@ app.post('/sign-up', routes.signUp);
 app.get('/sign-out', routes.signOut);
 app.post('/save-my-mood', routes.saveMood);
 
-app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
-
-
+app.listen(port);
