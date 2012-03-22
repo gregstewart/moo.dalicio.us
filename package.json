@@ -1,13 +1,17 @@
 {
-    "name": "happiness"
-  , "version": "0.0.1"
+    "name": "moo.dalicio.us"
+  , "version": "0.0.5"
   , "private": true
   , "dependencies": {
-      "express": "2.5.5"
-    , "jade": ">= 0.0.1"
-    , "coffee-script":    ">= 1.2.0"
-    , "zombie":           ">= 0.12.14"
-    , "jasmine-node":     ">= 1.0.21"
-    , "mongodb":          ">= 0.9.9"
+      "express":    "2.5.5"
+    , "jade":       ">= 0.0.1"
+    , "mongodb":    ">= 0.9.9"
+    , "moment":     ">= 1.5.0"
+  }
+  , "devDependencies": {
+    "coffee-script":    ">= 1.2.0"
+    , "zombie":         ">= 0.12.14"
+    , "jasmine-node":   ">= 1.0.21"
+    , "mocha":          ">= 0.14.1"
   }
 }

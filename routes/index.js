@@ -1,8 +1,8 @@
-var Utils = require('../app/model/Utils');
-var User = require('../app/model/UserMongoose');
-var Mood = require('../app/model/MoodMongoose');
-
-var utils = new Utils();
+var moment = require('moment'),
+    Utils = require('../app/model/Utils'),
+    User = require('../app/model/UserMongoose'),
+    Mood = require('../app/model/MoodMongoose'),
+    utils = new Utils();
 
 /*
  * GET home page.
@@ -125,7 +125,7 @@ exports.getMoods = function(req, res) {
         if (moods !== null) {
             var data = [];
             for (var i = 0; i < moods.length; i++) {
-                data.push( {y: moods[i].date, a: moods[i].value*100} );
+                data.push( {y: moment(moods[i].date).format('dd/MM/YYYY HH:mm'), a: moods[i].value*100} );
             }
             res.json(data);
         }
