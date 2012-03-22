@@ -34,7 +34,7 @@ app.configure('development', function(){
 });
 
 app.configure('production', function(){
-    mongoose.connect('mongodb://localhost/production');
+    mongoose.connect(process.env.MONGOLAB_URI);
     app.use(express.errorHandler());
 });
 
