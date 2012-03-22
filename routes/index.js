@@ -125,7 +125,7 @@ exports.getMoods = function(req, res) {
         if (moods !== null) {
             var data = [];
             for (var i = 0; i < moods.length; i++) {
-                data.push( {y: moment(moods[i].date).format('dd/MM/YYYY HH:mm'), a: moods[i].value*100} );
+                data.push( {y: moment(moods[i].date).format('DD/MM/YYYY HH:mm'), a: moods[i].value*100} );
             }
             res.json(data);
         }
